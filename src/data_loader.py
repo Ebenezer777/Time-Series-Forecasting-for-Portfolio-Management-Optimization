@@ -17,10 +17,10 @@ def download_data(start="2015-01-01", end="2026-01-15"):
 def save_processed(data):
     out_dir = Path("data/processed")
     out_dir.mkdir(parents=True, exist_ok=True)
-
+    data.ffill(inplace=True)
     for asset in ASSETS:
         df = data[asset].copy()
-        df.fillna(method="ffill", inplace=True)
+        
         df.to_csv(out_dir / f"{asset.lower()}.csv")
 
 if __name__ == "__main__":
