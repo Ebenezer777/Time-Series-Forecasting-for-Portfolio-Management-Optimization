@@ -5,9 +5,17 @@ from statsmodels.tsa.arima.model import ARIMA
 from pmdarima import auto_arima
 
 def load_tsla():
+    # 1. Load the data
     df = pd.read_csv("data/processed/tsla.csv", index_col=0, parse_dates=True)
+    
+    # 2. Set the frequency to Business Days ('B') 
+    # This tells Python to expect data only on Mon-Fri
+    df = df.asfreq('B')
+    
+    # 3. Fill missing values (like holidays) using the last known price
+    df = df.ffill()
+    
     return df["Close"]
-
 def train_test_split(series, split_date="2024-12-31"):
     train = series[series.index <= split_date]
     test  = series[series.index > split_date]
@@ -39,7 +47,7 @@ def evaluate(y_true, y_pred):
 
     mae  = mean_absolute_error(y_true, y_pred)
     rmse = np.sqrt(mean_squared_error(y_true, y_pred))
-    mape = np.mean(np.abs((y_true - y_pred) / y_true)) * 100
+    mape = np.mean(np.abs((y_true.values - y_pred.values) / y_true.values)) * 100
 
     return mae, rmse, mape
 

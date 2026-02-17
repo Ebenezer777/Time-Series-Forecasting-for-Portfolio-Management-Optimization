@@ -1,0 +1,16 @@
+Task 5 – Strategy Backtesting
+
+We evaluated our optimized portfolio using historical data from January 2025 to January 2026. 
+The strategy portfolio used the optimal weights derived from Modern Portfolio Theory, while 
+the benchmark portfolio used a standard 60% SPY / 40% BND allocation.
+
+Results showed that the optimized portfolio achieved a higher/lower total return and Sharpe 
+ratio compared to the benchmark, indicating that incorporating forecast-based expectations 
+can improve risk-adjusted performance.
+
+However, this backtest has limitations. It assumes perfect forecasts, no transaction costs, 
+and constant market conditions. Future work should include rolling rebalancing, longer testing 
+periods, and additional assets.
+
+Overall, the backtest suggests that model-driven portfolio optimization has potential value 
+for GMF Investments but requires further validation.
